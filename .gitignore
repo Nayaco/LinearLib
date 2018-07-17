@@ -1,6 +1,8 @@
-main.o
-matrix.o
+*.o
 matrix.1.cpp
-.in
+*.in
 .vscode/
 main
+test*
+gener
+test.in

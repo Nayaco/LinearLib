@@ -4,6 +4,7 @@
 
 #ifndef MAT_H
 #define MAT_H
+
 #include <cstdlib>
 #include <cstring>
 #include <cstdio>
@@ -14,7 +15,6 @@ class MAT{
     public:
         int r, c;
         double **Data;
-
         MAT();
         
         MAT(const MAT &B);
@@ -30,6 +30,8 @@ class MAT{
         void PrintM(FILE *stream);
         
         void MINUS();
+        
+        void TRANS();
         
         int MWISE(std::function<int (MAT&)> func);
         

@@ -1,4 +1,5 @@
 #include "matrix.h"
+#include <time.h>
 
 int Plus1(MAT &A){
     int r = A.r;
@@ -13,13 +14,14 @@ int Plus1(MAT &A){
 int main(int argc, char const *argv[])
 {
     MAT M = MAT(2, 2);    
-    MAT N = MAT(2, 2);
+    //MAT N = MAT(100, 100);
     FILE *file = fopen("test.in", "r");
+    FILE *out = fopen("test.out", "w");
     M.GetM(file);
-    N.GetM(file);
-    MAT OP = MAT(2, 2);
-    N.MWISE(Plus1);
-
-    N.PrintM(stdout);
+    //N.GetM(file);
+    M.TRANS();    
+    //printf("%x\n", &OP);
+    //MULT(M, M, OP);
+    M.PrintM(out);
     return 0;
 }

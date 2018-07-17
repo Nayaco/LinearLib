@@ -25,8 +25,8 @@ MAT::MAT(int r ,int c){
 
 MAT::~MAT(){
     int r = this->r;
-     for(int i = 0; i <r; i++)free(this->Data[i]);
-    free(this->Data);
+    for(int i = 0; i <r; i++)delete[] this->Data[i];
+    delete[] this->Data;
 }
 
 bool MAT::GetM(FILE* stream){
@@ -63,6 +63,24 @@ void MAT::MINUS(){
             this->Data[i][j] = -this->Data[i][j];
         }
     }
+}
+
+void MAT::TRANS(){
+    int r = this->r;
+    int c = this->c;
+    double **data = this->Data;
+    double **trans = new double*[c];
+    for(int i = 0; i < c; i++)trans[i] = new double[r];
+    for(int i = 0; i < r; i++){
+        for(int j = 0; j < c; j++){
+            trans[j][i] = data[i][j];
+        }
+    }
+    for(int i = 0; i <r; i++)delete[] this->Data[i];
+    delete[] this->Data;
+    this->r = c;
+    this->c = r;
+    this->Data = trans;
 }
 
 int MAT::MWISE(std::function<int (MAT&)> func){
@@ -115,7 +133,6 @@ MAT MAT::operator*(const MAT &B)const{
             for(int k = 0; k < c; k++)C.Data[i][j] += Ad[i][k] * Bd[k][j];
         }
     }
-    
     return C;
 }
 
@@ -130,7 +147,6 @@ MAT MAT::operator*(const int n)const{
             C.Data[i][j] = data[i][j] * n;
         }   
     }
-
     return C;
 }
 
